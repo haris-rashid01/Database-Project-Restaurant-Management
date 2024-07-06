@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Restaurant Management System</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+</head>
+
+<body>
+    <script src="script.js"></script>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#" id="dashboardLink">Dashboard</a>
+        <button class="navbar-toggler" type="button" id="sidebarToggle">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <div class="sidebar animate_animated animate_fadeInLeft">
+        <a href="clients" class="animate_animated animate_fadeInLeft" data-section="clientsSection">Clients</a>
+        <a href="1.html" class="animate_animated animatefadeInLeft animate_delay-1s" data-section="ordersSection">Orders</a>
+        <a href="#bill" class="animate_animated animatefadeInLeft animate_delay-2s" data-section="billSection">Bill</a>
+        <a href="#waiter" class="animate_animated animatefadeInLeft animate_delay-3s" data-section="waiterSection">Waiter</a>
+        <a href="#cook" class="animate_animated animatefadeInLeft animate_delay-4s" data-section="cookSection">Cook</a>
+        <a href="#supplier" class="animate_animated animatefadeInLeft animate_delay-5s" data-section="supplierSection">Supplier</a>
+        <a href="#tablesInfo" class="animate_animated animatefadeInLeft animate_delay-6s" data-section="tablesInfoSection">Tables Info</a>
+    </div>
+
+    <div class="content animate_animated animate_fadeIn">
+        <h1>Welcome to the Dashboard</h1>
+        <p>Select an option from the sidebar to manage different aspects of your restaurant.</p>
+
+        <div class="chart-container">
+            <canvas id="salesChart"></canvas>
+        </div>
+
+        <div id="clientsSection" class="section">
+            <h2>Clients Section</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#clientModal" data-action="add">Add Client</button>
+                <button class="btn btn-secondary" data-toggle="modal" data-target="#clientModal" data-action="edit">Edit Client</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#clientModal" data-action="remove">Remove Client</button>
+            </div>
+            <p>Manage your clients here.</p>
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Restaurant ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>101</td>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>1234567890</td>
+                            <td>john@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>102</td>
+                            <td>Jane</td>
+                            <td>Smith</td>
+                            <td>9876543210</td>
+                            <td>jane@example.com</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="ordersSection" class="section">
+            <h2>Orders Section</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#orderModal" data-action="add">Add Order</button>
+                <button class="btn btn-secondary" data-toggle="modal" data-target="#orderModal" data-action="edit">Edit Order</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#orderModal" data-action="remove">Remove Order</button>
+            </div>
+            <p>Manage your orders here.</p>
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer ID</th>
+                        <th>Customer First Name</th>
+                        <th>No of Items</th>
+                        <th>Descriptions</th>
+                        <th>Created At</th>
+                        <th>Order Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>101</td>
+                            <td>John</td>
+                            <td>3</td>
+                            <td>Pizza, Salad, Coke</td>
+                            <td>2024-05-30 12:00 PM</td>
+                            <td>Delivered</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>102</td>
+                            <td>Jane</td>
+                            <td>2</td>
+                            <td>Burger, Fries</td>
+                            <td>2024-05-30 01:30 PM</td>
+                            <td>In Progress</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="billSection" class="section">
+            <h2>Bill Section</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#billModal" data-action="add">Add Bill</button>
+                <button class="btn btn-secondary" data-toggle="modal" data-target="#billModal" data-action="edit">Edit Bill</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#billModal" data-action="remove">Remove Bill</button>
+            </div>
+            <p>Manage your billing here.</p>
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Bill No</th>
+                        <th>Order ID</th>
+                        <th>Customer First Name</th>
+                        <th>Customer Last Name</th>
+                        <th>Customer ID</th>
+                        <th>Order Details</th>
+                        <th>Total Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>101</td>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>1</td>
+                            <td>Pizza (Large), Coke (2), Salad</td>
+                            <td>25.99</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>102</td>
+                            <td>Jane</td>
+                            <td>Smith</td>
+                            <td>2</td>
+                            <td>Burger, Fries (Large)</td>
+                            <td>18.50</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="waiterSection" class="section">
+            <h2>Waiter Section</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#waiterModal" data-action="add">Add Waiter</button>
+                <button class="btn btn-secondary" data-toggle="modal" data-target="#waiterModal" data-action="edit">Edit Waiter</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#waiterModal" data-action="remove">Remove Waiter</button>
+            </div>
+            <p>Manage your waiters here.</p>
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Waiter ID</th>
+                        <th>First Name</th>
+                        <th>Customer ID</th>
+                        <th>Order ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>John</td>
+                            <td>101</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Jane</td>
+                            <td>102</td>
+                            <td>2</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="cookSection" class="section">
+            <h2>Cook Section</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#cookModal" data-action="add">Add Cook</button>
+                <button class="btn btn-secondary" data-toggle="modal" data-target="#cookModal" data-action="edit">Edit Cook</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#cookModal" data-action="remove">Remove Cook</button>
+            </div>
+            <p>Manage your cooks here.</p>
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Cook ID</th>
+                        <th>Cook Name</th>
+                        <th>Order ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>Mark</td>
+                            <td>101</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Alexa</td>
+                            <td>102</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="supplierSection" class="section">
+            <h2>Supplier Section</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#supplierModal" data-action="add">Add Supplier</button>
+                <button class="btn btn-secondary" data-toggle="modal" data-target="#supplierModal" data-action="edit">Edit Supplier</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#supplierModal" data-action="remove">Remove Supplier</button>
+            </div>
+            <p>Manage your suppliers here.</p>
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Supplier ID</th>
+                        <th>Supplier Name</th>
+                        <th>Address</th>
+                        <th>Contact</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>Fresh Foods Inc.</td>
+                            <td>123 Main St, City</td>
+                            <td>123-456-7890</td>
+                            <td>Vegetables, Fruits</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Meat Masters Ltd.</td>
+                            <td>456 Oak St, Town</td>
+                            <td>987-654-3210</td>
+                            <td>Beef, Chicken, Pork</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="tablesInfoSection" class="section">
+            <h2>Tables Info Section</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#tablesInfoModal" data-action="add">Add Table</button>
+                <button class="btn btn-secondary" data-toggle="modal" data-target="#tablesInfoModal" data-action="edit">Edit Table</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#tablesInfoModal" data-action="remove">Remove Table</button>
+            </div>
+            <p>View information about your tables here.</p>
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Table Number</th>
+                        <th>Capacity</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>4</td>
+                            <td>Occupied</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>6</td>
+                            <td>Available</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="bg-body-tertiary text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2024 Copyright:
+            <a class="text-body" href="https://mdbootstrap.com/">Made By Farhan, Haris and Abdul-Raheem</a>
+        </div>
+    </footer>
+
+    <!-- Modals for each section -->
+
+    <!-- Client Modal -->
+    <div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="clientModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="clientModalLabel">Client Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="clientForm">
+                        <div class="form-group">
+                            <label for="clientCustomerId">Customer ID</label>
+                            <input type="text" class="form-control" id="clientCustomerId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientRestaurantId">Restaurant ID</label>
+                            <input type="text" class="form-control" id="clientRestaurantId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientFirstName">First Name</label>
+                            <input type="text" class="form-control" id="clientFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientLastName">Last Name</label>
+                            <input type="text" class="form-control" id="clientLastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientPhone">Phone</label>
+                            <input type="text" class="form-control" id="clientPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientEmail">Email</label>
+                            <input type="email" class="form-control" id="clientEmail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Order Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="orderOrderId">Order ID</label>
+                            <input type="text" class="form-control" id="orderOrderId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderCustomerId">Customer ID</label>
+                            <input type="text" class="form-control" id="orderCustomerId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderCustomerFirstName">Customer First Name</label>
+                            <input type="text" class="form-control" id="orderCustomerFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderNoOfItems">No of Items</label>
+                            <input type="number" class="form-control" id="orderNoOfItems" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderDescriptions">Descriptions</label>
+                            <textarea class="form-control" id="orderDescriptions" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderCreatedAt">Created At</label>
+                            <input type="datetime-local" class="form-control" id="orderCreatedAt" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderStatus">Order Status</label>
+                            <input type="text" class="form-control" id="orderStatus" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bill Modal -->
+    <div class="modal fade" id="billModal" tabindex="-1" role="dialog" aria-labelledby="billModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="billModalLabel">Bill Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="billForm">
+                        <div class="form-group">
+                            <label for="billNo">Bill No</label>
+                            <input type="text" class="form-control" id="billNo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="billOrderId">Order ID</label>
+                            <input type="text" class="form-control" id="billOrderId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="billCustomerFirstName">Customer First Name</label>
+                            <input type="text" class="form-control" id="billCustomerFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="billCustomerLastName">Customer Last Name</label>
+                            <input type="text" class="form-control" id="billCustomerLastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="billCustomerId">Customer ID</label>
+                            <input type="text" class="form-control" id="billCustomerId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="billOrderDetails">Order Details</label>
+                            <textarea class="form-control" id="billOrderDetails" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="billTotalAmount">Total Amount</label>
+                            <input type="number" class="form-control" id="billTotalAmount" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Waiter Modal -->
+    <div class="modal fade" id="waiterModal" tabindex="-1" role="dialog" aria-labelledby="waiterModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="waiterModalLabel">Waiter Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="waiterForm">
+                        <div class="form-group">
+                            <label for="waiterId">Waiter ID</label>
+                            <input type="text" class="form-control" id="waiterId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="waiterFirstName">First Name</label>
+                            <input type="text" class="form-control" id="waiterFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="waiterCustomerId">Customer ID</label>
+                            <input type="text" class="form-control" id="waiterCustomerId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="waiterOrderId">Order ID</label>
+                            <input type="text" class="form-control" id="waiterOrderId" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cook Modal -->
+    <div class="modal fade" id="cookModal" tabindex="-1" role="dialog" aria-labelledby="cookModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cookModalLabel">Cook Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="cookForm">
+                        <div class="form-group">
+                            <label for="cookId">Cook ID</label>
+                            <input type="text" class="form-control" id="cookId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cookName">Cook Name</label>
+                            <input type="text" class="form-control" id="cookName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cookOrderId">Order ID</label>
+                            <input type="text" class="form-control" id="cookOrderId" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supplier Modal -->
+    <div class="modal fade" id="supplierModal" tabindex="-1" role="dialog" aria-labelledby="supplierModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="supplierModalLabel">Supplier Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="supplierForm">
+                        <div class="form-group">
+                            <label for="supplierId">Supplier ID</label>
+                            <input type="text" class="form-control" id="supplierId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplierName">Supplier Name</label>
+                            <input type="text" class="form-control" id="supplierName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplierAddress">Address</label>
+                            <input type="text" class="form-control" id="supplierAddress" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplierContact">Contact</label>
+                            <input type="text" class="form-control" id="supplierContact" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplierDetails">Details</label>
+                            <textarea class="form-control" id="supplierDetails" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables Info Modal -->
+    <div class="modal fade" id="tablesInfoModal" tabindex="-1" role="dialog" aria-labelledby="tablesInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tablesInfoModalLabel">Table Info Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="tablesInfoForm">
+                        <div class="form-group">
+                            <label for="tableNumber">Table Number</label>
+                            <input type="text" class="form-control" id="tableNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tableCapacity">Capacity</label>
+                            <input type="number" class="form-control" id="tableCapacity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tableStatus">Status</label>
+                            <input type="text" class="form-control" id="tableStatus" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

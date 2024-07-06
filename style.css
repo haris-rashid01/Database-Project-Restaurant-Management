@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff7e6; /* Lighter orange background */
+}
+
+.navbar {
+    background-color: #d9534f; /* Darker red for the navbar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: #fff;
+    font-weight: 700;
+}
+
+.navbar-brand:hover {
+    color: #ffe0e0;
+}
+
+.sidebar {
+    background: #f8f9fa url('https://www.transparenttextures.com/patterns/cubes.png') repeat;
+    padding: 1rem;
+    height: calc(100% - 56px); /* Adjust for the height of the navbar */
+    position: fixed;
+    top: 56px; /* Start below the navbar */
+    left: 0; /* Show the sidebar initially */
+    width: 250px;
+    border-right: 1px solid #dee2e6;
+    border-radius: 0 20px 20px 0;
+    transition: left 0.4s ease-in-out; /* Smooth transition for sliding effect */
+    z-index: 1000; /* Ensure sidebar is above other content */
+}
+
+.sidebar.hidden {
+    left: -250px; /* Hide the sidebar when hidden class is added */
+}
+
+.sidebar a {
+    color: #343a40; /* Darker color for sidebar links */
+    display: block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar a:hover {
+    background-color: #e9ecef;
+    color: #d9534f;
+    transform: translateX(5px); /* Subtle move effect on hover */
+}
+
+.content {
+    margin-left: 250px; /* Adjust for the sidebar width */
+    padding: 2rem;
+    padding-top: 76px; /* Adjust for the height of the navbar */
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: margin-left 0.4s ease-in-out; /* Smooth transition for content area */
+}
+
+.content.expanded {
+    margin-left: 0; /* Adjust for the sidebar width */
+}
+
+.content h1, .chart-container {
+    display: block; /* Show main dashboard content initially */
+}
+
+.content .section {
+    display: none; /* Hide all sections initially */
+}
+
+.content .section.active {
+    display: block; /* Show the active section */
+}
+
+.content h1.hidden, .chart-container.hidden {
+    display: none; /* Hide main dashboard content */
+}
+
+.table-custom {
+    margin-top: 2rem;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff7e6; /* Matching theme */
+    border: 1px solid #ddd;
+}
+
+.table-custom th, .table-custom td {
+    text-align: left;
+    padding: 12px;
+}
+
+.table-custom th {
+    background-color: #d9534f;
+    color: white;
+    border-top: 1px solid #ddd;
+}
+
+.table-custom tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-custom tr:hover {
+    background-color: #ddd;
+}
+
+.btn-group {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 767px) {
+    .sidebar {
+        width: 100%; /* Full width on smaller screens */
+        left: -100%; /* Hide sidebar offscreen */
+    }
+
+    .sidebar.hidden {
+        left: 0;
+    }
+
+    .content.expanded {
+        margin-left: 0; /* No margin for content on smaller screens */
+    }
+}
+
+/* Chart.js style */
+.chart-container {
+    margin-top: 2rem;
+}
